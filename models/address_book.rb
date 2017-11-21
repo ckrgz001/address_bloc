@@ -7,7 +7,7 @@ class AddressBook
 
     def initialize
         @entries = []
-      end
+    end
 
 
 def add_entry(name, phone_number, email)
@@ -20,58 +20,17 @@ def add_entry(name, phone_number, email)
       end
       index+= 1
     end
-
     entries.insert(index, Entry.new(name, phone_number, email))
   end
 
 
 def import_from_csv(file_name)
-    it "imports the 1st entry" do
-        book.import_from_csv("entries.csv")
-        # Check the first entry
-        entry_one = book.entries[0]
-  
-        # #5
-        expect(entry_one.name).to eq "Bill"
-        expect(entry_one.phone_number).to eq "555-555-4854"
-        expect(entry_one.email).to eq "bill@blocmail.com"
-      end
-
-      it "imports the 2nd entry" do
-        book.import_from_csv("entries.csv")
-        # Check the second entry
-        entry_two = book.entries[1]
-        expect(entry_two.name).to eq "Bob"
-        expect(entry_two.phone_number).to eq "555-555-5415"
-        expect(entry_two.email).to eq "bob@blocmail.com"
-      end
-  
-      it "imports the 3rd entry" do
-        book.import_from_csv("entries.csv")
-        # Check the third entry
-        entry_three = book.entries[2]
-        expect(entry_three.name).to eq "Joe"
-        expect(entry_three.phone_number).to eq "555-555-3660"
-        expect(entry_three.email).to eq "joe@blocmail.com"
-      end
-  
-      it "imports the 4th entry" do
-        book.import_from_csv("entries.csv")
-        # Check the fourth entry
-        entry_four = book.entries[3]
-        expect(entry_four.name).to eq  "Sally"
-        expect(entry_four.phone_number).to eq "555-555-4646"
-        expect(entry_four.email).to eq "sally@blocmail.com"
-      end
-  
-      it "imports the 5th entry" do
-        book.import_from_csv("entries.csv")
-        # Check the fifth entry
-        entry_five = book.entries[4]
-        expect(entry_five.name).to eq "Sussie"
-        expect(entry_five.phone_number).to eq "555-555-2036"
-        expect(entry_five.email).to eq "sussie@blocmail.com"
-      end
+    csv_text = File.read(file_name)
+    csv = CSV.parse(csv_text, headers: true, skip_blanks: true)
+  # #8
+    csv.each do |row|
+      row_hash = row.to_hash
+      add_entry(row_hash["name"], row_hash["phone_number"], row_hash["email"])
     end
 end
 
@@ -85,3 +44,4 @@ def remove_entry(name, phone_number, email)
      entries.delete(delete_entry)
     end
 end
+
