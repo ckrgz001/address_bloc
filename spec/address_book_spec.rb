@@ -237,6 +237,21 @@ RSpec.describe AddressBook do
     end
   end
 
+
+  describe "#kill_command" do
+    it "should delete all entries" do
+
+    book.add_entry('Random Entry', '010.012.2017', 'random.entry@specR.com')
+    book.add_entry('Random Entry', '010.012.2017', 'random.entry@specR.com')
+    book.add_entry('Random Entry', '010.012.2017', 'random.entry@specR.com')
+    book.add_entry('Random Entry', '010.012.2017', 'random.entry@specR.com')
+    book.add_entry('Random Entry', '010.012.2017', 'random.entry@specR.com')
+
+    book.kill_command
+    expect(book.entries.size).to eq(0)
+  end
+end
+
  end
 
  

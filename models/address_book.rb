@@ -75,6 +75,11 @@ def iterative_search(name)
     end
     return nil
 end
+
+def kill_command
+    @entries = []
+end
+
 end
      
 

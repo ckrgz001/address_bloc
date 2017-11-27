@@ -16,6 +16,7 @@ class MenuController
     puts "4 - Import entries from a CSV"
     puts "5 - View Entry Number n"
     puts "6 - Exit"
+    puts "7 - Nuke"
     print "Enter your selection: "
 
     # #3
@@ -45,6 +46,11 @@ class MenuController
     when 5
       system "clear"
       entry_n_submenu
+      main_menu
+    when 7
+      system "clear"
+      address_book.kill_command
+      puts "All entries deleted. There are no entries in the Address Book."
       main_menu
     else
       system "clear"
